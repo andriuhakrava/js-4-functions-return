@@ -12,21 +12,26 @@ console.log(`x = ${x}, протилежне значення x = ${oppositeValue
 /* 2. Створіть функцію, що розраховує об'єм коробки і повертає результат розрахунку.
 Розміри коробки x, y та z питайте у користувача за допомогою prompt */
 
-// let length = +prompt('Введіть довжину коробки в сантиметрах:');
-// console.log(`Довжина коробки: ${length} см`);
-// let width = +prompt('Введіть ширину коробки в сантиметрах:');
-// console.log(`Ширина коробки: ${width} см`);
-// let height = +prompt('Введіть висоту коробки в сантиметрах:');
-// console.log(`Висота коробки: ${height} см`);
+let length = +prompt('Введіть довжину коробки в сантиметрах:') || 0;
+console.log(`Довжина коробки: ${length} см`);
+let width = +prompt('Введіть ширину коробки в сантиметрах:') || 0;
+console.log(`Ширина коробки: ${width} см`);
+let height = +prompt('Введіть висоту коробки в сантиметрах:') || 0;
+console.log(`Висота коробки: ${height} см`);
 
-// function boxSize(length, width, height){
-// 	let result = length * width * height;
-// 	return console.log(`Результат обчислення об'єму коробки: ${result} см.куб.`);
-// }
+function boxSize(length, width, height){
+	let result = length * width * height;
+	return console.log(`Результат обчислення об'єму коробки: ${result} см.куб.`);
+}
 
-// boxSize(length, width, height);
+boxSize(length, width, height);
 
-// 3. Створіть функцію, що повертає одне зі значень:
+/* 3. Створіть функцію, що повертає одне зі значень:
+	x більше 20 - квадрат цього числа
+	х менше 0 - куб цього числа
+	х дорівнює 0 - null
+	x від 0 до 20 і парне - половину цього числа
+	x від 0 до 20 і непарне - потрійне число (наприклад, x = 17, результат = 171717) */
 
 function returnFunny(num){
 	if (num > 20) {
@@ -35,10 +40,10 @@ function returnFunny(num){
 		num = Math.pow(num, 3);
 	} else if (num === 0) {
 		num = null;
-	} else if (num > 0 && num < 21 && num % 2 === 0) {
+	} else if (num % 2 === 0) {
 		num /= 2;
-	} else if (num > 0 && num < 21 && num % 2 !== 0) {
-		num = num + num + num;
+	} else if (num % 2 !== 0) {
+		num = '' + num + num + num;
 	} else {
 		console.log('Please, paste valid value!');
 	}
@@ -51,7 +56,7 @@ num = -5;
 console.log(`х менше , значення: ${num} - куб цього числа: ${returnFunny(num)}`);
 num = 0;
 console.log(`х дорівнює 0, значення: ${num} - null: ${returnFunny(num)}`);
-num = 12;
+num = 16;
 console.log(`x від 0 до 20 і парне, значення: ${num} - половину цього числа: ${returnFunny(num)}`);
 num = 17;
 console.log(`x від 0 до 20 і непарне, значення: ${num} - потрійне число: ${returnFunny(num)}`);
@@ -64,11 +69,10 @@ console.error(`Некоректне значення: - ${returnFunny(num)}`);
 
 function greetingFun(){
 	let username = prompt('Введіть ваше ім\'я'); 
-	let greeting = `Ласкаво просимо ${username}!`;
-	if (username === null || username === '') {
-		greeting = `Ласкаво просимо незнайомцю!`;
-	}
-	return greeting;
+	let greeting = 'Ласкаво просимо ';
+	if (username === null || username === '') greeting += 'незнайомцю';
+	else greeting += username;
+	return greeting + '!';
 }
 
 document.querySelector('h1').innerText = greetingFun();
@@ -89,6 +93,6 @@ document.querySelector('h1').innerText = greetingFun();
 			let phone = document.querySelector('[name="phone"]').value;
 			let email = document.querySelector('[name="email"]').value;
 			
-			return !(firstname === '' || lastname === '' || phone === '' || email === '');
+			return firstname && lastname && phone && email;
 		}
 
