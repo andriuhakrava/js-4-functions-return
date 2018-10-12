@@ -21,7 +21,7 @@ console.log(`Висота коробки: ${height} см`);
 
 function boxSize(length, width, height){
 	let result = length * width * height;
-	return console.log(`Результат обчислення об'єму коробки: ${result} см.куб.`);
+	console.log(`Результат обчислення об'єму коробки: ${result} см.куб.`);
 }
 
 boxSize(length, width, height);
